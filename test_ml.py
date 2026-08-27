@@ -1,28 +1,43 @@
 import pytest
-# TODO: add necessary import
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.model_selection import train_test_split
+from ml.model import train_model, inference
+import numpy as np
 
 # TODO: implement the first test. Change the function name and input as needed
-def test_one():
+def test_model_algo():
     """
-    # add description for the first test
+    # This test ensures that train_model returns a Random Forest Classifier
     """
-    # Your code here
-    pass
+    X_train = [[0,1], [1,2], [2,3], [3,4]]
+    y_train = [0, 0, 1, 1]
+
+    model = train_model(X_train, y_train)
+    
+    assert isinstance(model, RandomForestClassifier)
 
 
 # TODO: implement the second test. Change the function name and input as needed
-def test_two():
+def test_split_data():
     """
-    # add description for the second test
+    # This test verifies the data is split into 80% training and 20% testing
     """
-    # Your code here
-    pass
+    data = list(range(100))
+    train, test = train_test_split(data, test_size=.2)
+
+    assert len(train) == 80
+    assert len(test) == 20
 
 
 # TODO: implement the third test. Change the function name and input as needed
-def test_three():
+def test_inference_type():
     """
-    # add description for the third test
+    # This test verifies the inference returns a NumPy array
     """
-    # Your code here
-    pass
+    X_train = [[0,1], [1,2], [2,3], [3,4]]
+    y_train = [0, 0, 1, 1]
+
+    model = train_model(X_train, y_train)
+    preds = inference(model, X_train)
+
+    assert isinstance(preds, np.ndarray)
